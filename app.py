@@ -1,18 +1,15 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
-from validators import user_validator, password_validator
-
+# from forms import LoginForm, RegisterForm
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 login_manager = LoginManager()
@@ -29,6 +26,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import ValidationError
+from validators import user_validator, password_validator
 
 
 class RegisterForm(FlaskForm):
@@ -51,7 +53,6 @@ class LoginForm(FlaskForm):
 
     submit = SubmitField('Login')
 
-
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -66,6 +67,8 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('dashboard'))
+
+
     return render_template('login.html', form=form)
 
 
