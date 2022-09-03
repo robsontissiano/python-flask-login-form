@@ -52,7 +52,7 @@ https://github.com/robsontissiano/python-flask-login-form
 ### Improvements to Do:
 * [ * ] Add bootstrap to frontend                                         [LVL 2] [Frontend Feature]
 * [   ] Split models, forms into modules                                  [LVL 2]
-* [   ] Split validators into a module                                    [LVL 3]
+* [ * ] Split validators into a module                                    [LVL 3]
 * [   ] Add Error treatment to API                                        [LVL 5]
 * [   ] Add Error messages to frontend                                    [LVL 3]
 * [   ] Add Unit tests                                                    [LVL 3]
