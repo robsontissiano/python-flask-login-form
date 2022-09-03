@@ -19,25 +19,28 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-
 @login_manager.user_loader
 def load_user(user_id):
+    """ Reload the user object from the user id stored in the session """
     return User.query.get(int(user_id))
 
 
 class User(db.Model, UserMixin):
+    """ Model for User """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
 
 
 class RegisterForm(FlaskForm):
+    """ Form for Register User """
     username = StringField(validators=user_validator, render_kw={"placeholder": "Username"})
     password = PasswordField(validators=password_validator, render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Register')
 
     def validate_username(self, username):
+        """ Method to check if user exists """
         existing_user_username = User.query.filter_by(
             username=username.data).first()
         if existing_user_username:
@@ -46,6 +49,7 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """ Form for Log a User in """
     username = StringField(validators=user_validator, render_kw={"placeholder": "Username"})
     password = PasswordField(validators=password_validator, render_kw={"placeholder": "Password"})
 
@@ -54,11 +58,13 @@ class LoginForm(FlaskForm):
 
 @app.route('/')
 def home():
+    """ Main endpoint to home index """
     return render_template('home.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """ Method that logs a user in and handle the login form """
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -72,18 +78,21 @@ def login():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
+    """ Dashboard endpoint to access after login """
     return render_template('dashboard.html')
 
 
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
+    """ Method to log a user out """
     logout_user()
     return redirect(url_for('login'))
 
 
 @ app.route('/register', methods=['GET', 'POST'])
 def register():
+    """ Method that registers a user and handle the register form """
     form = RegisterForm()
 
     if form.validate_on_submit():
