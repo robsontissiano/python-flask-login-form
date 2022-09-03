@@ -3,8 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+# from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
+from validators import user_validator, password_validator
+
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
@@ -30,11 +32,13 @@ class User(db.Model, UserMixin):
 
 
 class RegisterForm(FlaskForm):
-    username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    username = StringField(validators=user_validator, render_kw={"placeholder": "Username"})
+    # username = StringField(validators=[
+    #                        InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
 
-    password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
+    password = PasswordField(validators=password_validator, render_kw={"placeholder": "Password"})
+    # password = PasswordField(validators=[
+    #                          InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Register')
 
@@ -47,11 +51,13 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+    username = StringField(validators=user_validator, render_kw={"placeholder": "Username"})
+    # username = StringField(validators=[
+    #                        InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
 
-    password = PasswordField(validators=[
-                             InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
+    password = PasswordField(validators=password_validator, render_kw={"placeholder": "Password"})
+    # password = PasswordField(validators=[
+    #                          InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Login')
 
