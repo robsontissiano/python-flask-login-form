@@ -1,0 +1,8 @@
+.center_div{
+    margin: 0 auto;
+    /* width:80%; */ /* value of your choice which suits your alignment */
+    /* position: absolute; */
+    margin-top: 20%;
+    /* -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+}
