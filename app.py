@@ -7,9 +7,15 @@ from wtforms.validators import ValidationError
 from flask_bcrypt import Bcrypt
 from validators import user_validator, password_validator
 
+from models.user import db, User
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
+# later on
+db.init_app(app)
+
+
+# app = Flask(__name__)
+# db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = 'thisisasecretkey'
@@ -23,13 +29,6 @@ login_manager.login_view = 'login'
 def load_user(user_id):
     """ Reload the user object from the user id stored in the session """
     return User.query.get(int(user_id))
-
-
-class User(db.Model, UserMixin):
-    """ Model for User """
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(80), nullable=False)
 
 
 class RegisterForm(FlaskForm):
