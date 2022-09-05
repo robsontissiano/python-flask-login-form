@@ -70,4 +70,4 @@ https://github.com/robsontissiano/python-flask-login-form
 * [   ] Logout throwing error on log Info
 * [   ] Invalid form error by default on get on login
 * [   ] Invalid form error by default on get on login
-* [   ]
+* [   ] Check bug when register user and do not login right after
