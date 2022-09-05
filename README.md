@@ -56,8 +56,8 @@ https://github.com/robsontissiano/python-flask-login-form
 * [ * ] Split models into modules                                         [LVL 3]
 * [ * ] Split forms into modules                                          [LVL 3]
 * [   ] Add Error treatment to API                                        [LVL 5]
-* [   ] Add Error messages to frontend                                    [LVL 3]
 * [   ] Add Unit tests                                                    [LVL 3]
+* [   ] Add Error messages to frontend                                    [LVL 3]
 * [   ] Use a base template, a header and a footer pattern frontend       [LVL 5]
 * [   ] Switch database to postgres                                       [LVL 5]
 * [   ] Add Delete user API (soft Delete)                                 [LVL 5]
@@ -65,3 +65,9 @@ https://github.com/robsontissiano/python-flask-login-form
 * [   ] Implement MVC architecture                                        [LVL 5]
 * [   ] Implement recover password Feature                                [LVL 8]
 * [   ]
+
+### Bugs :
+* [   ] Logout throwing error on log Info
+* [   ] Invalid form error by default on get on login
+* [   ] Invalid form error by default on get on login
+* [   ] Check bug when register user and do not login right after
