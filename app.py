@@ -1,5 +1,4 @@
 from flask import Flask, render_template, url_for, redirect
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_user, LoginManager, login_required, logout_user
 from flask_bcrypt import Bcrypt
 
