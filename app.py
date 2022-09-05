@@ -49,20 +49,17 @@ def login():
                 message = f'User {form.username.data} logged successfully.'
                 app.logger.info(message)
                 # check how to send message as an argument to redirect
-                return redirect(url_for("dashboard"))
+                # return redirect(url_for("dashboard"))
+                return render_template("dashboard.html", message=messages)
             else:
                 message = 'Wrong Password'
-                app.logger.error(message)
-                messages.append(message)
                 status = 400
         else:
             message = f'User {form.username.data} not found'
-            app.logger.error(message)
-            messages.append(message)
             status = 400
-    # else:
-    #     messages.append('Form invalid')
-    #     status = 400
+
+    messages.append(message)
+    app.logger.error(message)
 
     # In case of form not valid or user not found, or password incorrect,
     # render login template and gets a 400 bad request error
@@ -83,6 +80,9 @@ def logout():
     """Method to log a user out"""
     logout_user()
     return redirect(url_for("login"))
+    # message = f'User logged out successfully.'
+    # app.logger.info(message)
+    # return render_template("dashboard.html", message=message)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -96,10 +96,8 @@ def register():
     user = user = User.query.filter_by(username=form.username.data).first()
 
     if user:
-        status = 400
         message = f'User {form.username.data} already exists.'
-        # messages.append(message)
-        # return render_template("register.html", form=form, message=messages), status
+        status = 400
 
     if not user and form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data)
@@ -109,20 +107,13 @@ def register():
             db.session.add(new_user)
             db.session.commit()
 
-            # in case of successful register, redirect to login
             message = f'User {form.username.data} registered successfully.'
             app.logger.info(message)
             messages.append(message)
-            # return redirect(url_for("login", message = messages)), status
-            # check how to send message as an argument to redirect
-            # return redirect(url_for("login"))
             return render_template("login.html", form=form, message=messages), status
         except NameError:
-            status = 400
             message = f'It was not possible to add the user {form.username.data}.'
-    # else:
-    #     messages.append('Form invalid')
-    #     status = 400
+            status = 400
 
     messages.append(message)
     app.logger.error(message)

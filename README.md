@@ -65,3 +65,9 @@ https://github.com/robsontissiano/python-flask-login-form
 * [   ] Implement MVC architecture                                        [LVL 5]
 * [   ] Implement recover password Feature                                [LVL 8]
 * [   ]
+
+### Bugs :
+* [   ] Logout throwing error on log Info
+* [   ] Invalid form error by default on get on login
+* [   ] Invalid form error by default on get on login
+* [   ]
