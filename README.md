@@ -64,10 +64,11 @@ https://github.com/robsontissiano/python-flask-login-form
 * [   ] Add Update (patch) user API (soft Delete)                         [LVL 5]
 * [   ] Implement MVC architecture                                        [LVL 5]
 * [   ] Implement recover password Feature                                [LVL 8]
-* [   ]
+* [   ] Deploy on Vercel
 
 ### Bugs :
 * [   ] Logout throwing error on log Info
 * [   ] Invalid form error by default on get on login
 * [   ] Invalid form error by default on get on login
-* [   ] Check bug when register user and do not login right after
+* [   ] When register user and do not login right after
+* [   ] SQLALCHEMY_TRACK_MODIFICATION error on running app
