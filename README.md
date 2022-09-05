@@ -27,6 +27,29 @@ python app.py
 python3 app.py
 ```
 
+
+##### To create the sqlite DB, open python terminal, and execute the following commands:
+```zsh
+from appdb import db
+```
+```zsh
+db.create_all()
+```
+
+##### To check if it was created, use the commands:
+```zsh
+sqlite3 database.db
+```
+
+
+```zsh
+.tables
+```
+
+```zsh
+.exit
+```
+
 https://github.com/robsontissiano/python-flask-login-form
 
 ## Complexity Level 1, 2, 3, 5 or 8
