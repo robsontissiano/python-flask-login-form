@@ -1,13 +1,11 @@
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import ValidationError
+from flask_login import login_user, LoginManager, login_required, logout_user
 from flask_bcrypt import Bcrypt
-from validators import user_validator, password_validator
 
 from models.user import db, User
+from forms import RegisterForm, LoginForm
+
 
 app = Flask(__name__)
 db.init_app(app)
@@ -26,40 +24,6 @@ login_manager.login_view = "login"
 def load_user(user_id):
     """Reload the user object from the user id stored in the session"""
     return User.query.get(int(user_id))
-
-
-class RegisterForm(FlaskForm):
-    """Form for Register User"""
-
-    username = StringField(
-        validators=user_validator, render_kw={"placeholder": "Username"}
-    )
-    password = PasswordField(
-        validators=password_validator, render_kw={"placeholder": "Password"}
-    )
-
-    submit = SubmitField("Register")
-
-    def validate_username(self, username):
-        """Method to check if user exists"""
-        existing_user_username = User.query.filter_by(username=username.data).first()
-        if existing_user_username:
-            raise ValidationError(
-                "That username already exists. Please choose a different one."
-            )
-
-
-class LoginForm(FlaskForm):
-    """Form for Log a User in"""
-
-    username = StringField(
-        validators=user_validator, render_kw={"placeholder": "Username"}
-    )
-    password = PasswordField(
-        validators=password_validator, render_kw={"placeholder": "Password"}
-    )
-
-    submit = SubmitField("Login")
 
 
 @app.route("/")

@@ -54,7 +54,7 @@ https://github.com/robsontissiano/python-flask-login-form
 * [ * ] Split validators into a module                                    [LVL 3]
 * [ * ] Align the content to center                                       [LVL 2]
 * [ * ] Split models into modules                                         [LVL 3]
-* [   ] Split forms into modules                                          [LVL 3]
+* [ * ] Split forms into modules                                          [LVL 3]
 * [   ] Add Error treatment to API                                        [LVL 5]
 * [   ] Add Error messages to frontend                                    [LVL 3]
 * [   ] Add Unit tests                                                    [LVL 3]
